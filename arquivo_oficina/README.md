@@ -1,128 +1,115 @@
+# Oficina SAEP
 
-<div align="center">
+Aplicação web para apoiar a gestão de uma oficina mecânica. O sistema reúne cadastro de clientes e veículos, agendamento de serviços e um painel com indicadores básicos.
 
-# 🔧 OFICINA MECÂNICA 🚘
+> Projeto educacional relacionado ao SAEP/SENAI. A aplicação depende de um banco MySQL preparado previamente.
 
-### 💙 Sistema de Oficina Mecânica
+## Funcionalidades
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:001B44,50:0066CC,100:00BFFF&height=180&section=header&text=OFICINA%20MEC%C3%82NICA&fontSize=35&fontColor=ffffff&animation=fadeIn" width="100%"/>
+- Autenticação de usuários com sessão e expiração configurada para 15 minutos.
+- Painel com totais de clientes, veículos e agendamentos, além dos próximos serviços.
+- Cadastro, edição, pesquisa e remoção de clientes.
+- Cadastro, edição e remoção de veículos, vinculados a um cliente.
+- Cadastro, reagendamento e remoção de serviços.
+- Interface em português, desenvolvida com templates HTML, CSS e JavaScript.
 
-![Status](https://img.shields.io/badge/STATUS-EM_DESENVOLVIMENTO-007BFF?style=for-the-badge)
-![Projeto](https://img.shields.io/badge/PROJETO-OFICINA_MECÂNICA-003366?style=for-the-badge)
-![GitHub](https://img.shields.io/badge/GITHUB-REPOSITÓRIO-00BFFF?style=for-the-badge&logo=github&logoColor=white)
+## Tecnologias
 
-### 🚗 Tecnologia, organização e mecânica!
+- Python e Flask
+- MySQL e `mysql-connector-python`
+- `bcrypt`
+- HTML, CSS e JavaScript
 
-**Um projeto voltado ao universo das oficinas mecânicas, unindo programação e soluções digitais.**
+## Estrutura
 
----
-
-### 📌 NAVEGAÇÃO
-
-[![Sobre](https://img.shields.io/badge/📖_SOBRE-005BBB?style=for-the-badge)](#-sobre-o-projeto)
-[![Objetivo](https://img.shields.io/badge/🎯_OBJETIVO-007BFF?style=for-the-badge)](#-objetivo)
-[![Estrutura](https://img.shields.io/badge/📂_ESTRUTURA-0099FF?style=for-the-badge)](#-estrutura-do-projeto)
-[![Execução](https://img.shields.io/badge/🚀_EXECUÇÃO-00AEEF?style=for-the-badge)](#-como-acessar)
-[![Autora](https://img.shields.io/badge/👩‍💻_AUTORA-003F88?style=for-the-badge)](#-desenvolvedora)
-
-</div>
-
----
-
-## 📖 Sobre o Projeto
-
-O projeto **Oficina Mecânica** foi criado para explorar o desenvolvimento de soluções tecnológicas relacionadas ao setor automotivo.
-
-A proposta é aplicar conhecimentos de programação e organização de sistemas em um contexto de oficina mecânica.
-
----
-
-## 🎯 Objetivo
-
-O objetivo do projeto é desenvolver habilidades de programação por meio de uma aplicação com temática automotiva.
-
-🔹 Aplicar conhecimentos de desenvolvimento de software.
-
-🔹 Trabalhar com a organização de um projeto.
-
-🔹 Explorar soluções digitais para o setor automotivo.
-
-🔹 Desenvolver habilidades práticas de programação.
-
----
-
-## 📂 Estrutura do Projeto
-
-A estrutura principal do repositório está organizada da seguinte forma:
+O código executável da aplicação fica em `arquivo_oficina/projetos/oficina`:
 
 ```text
-📦 Oficina-mec-nica
- ┣ 📂 projetos
- ┃ ┗ 📂 oficina
- ┣ 📄 .gitattributes
- ┗ 📄 README.md
+.
+├── README.md
+└── arquivo_oficina/
+    ├── README.md
+    └── projetos/
+        └── oficina/
+            ├── app.py
+            ├── autenticacao.py
+            ├── banco.py
+            ├── clientes.py
+            ├── veiculos.py
+            ├── agendamento.py
+            ├── rotas.py
+            ├── templates/
+            ├── static/
+            └── guia_passo_a_passo_aula.md
 ```
 
----
+O guia passo a passo contém a modelagem SQL e instruções adicionais de desenvolvimento. Atualmente, o repositório não inclui um `requirements.txt` nem um arquivo `.sql` separado.
 
-## 🚀 Como Acessar
+## Requisitos
 
-Para obter uma cópia do projeto, execute:
+- Python 3.10 ou superior
+- MySQL em execução
+- Banco de dados e tabelas criados conforme a seção **Fase 2: Banco de Dados Relacional** do arquivo `arquivo_oficina/projetos/oficina/guia_passo_a_passo_aula.md`
+
+## Instalação e execução
+
+Clone o repositório e entre na pasta da aplicação:
 
 ```bash
-git clone https://github.com/rafamerlo/Oficina-mec-nica.git
+git clone https://github.com/mathiasfelippe/oficina_saep.git
+cd oficina_saep/arquivo_oficina/projetos/oficina
 ```
 
-Em seguida, acesse a pasta:
+Crie e ative um ambiente virtual:
 
 ```bash
-cd Oficina-mec-nica
+python -m venv .venv
+
+# Linux ou macOS
+source .venv/bin/activate
+
+# Windows PowerShell
+.venv\Scripts\Activate.ps1
 ```
 
-Os arquivos do projeto estão disponíveis no diretório:
+Instale as dependências usadas no projeto e indicadas no guia:
 
-```text
-projetos/oficina
+```bash
+python -m pip install Flask==3.0.3 mysql-connector-python==8.4.0 bcrypt==4.1.3 Werkzeug==3.0.3
 ```
 
-🔗 **[ACESSAR REPOSITÓRIO](https://github.com/rafamerlo/Oficina-mec-nica)**
+Configure o acesso ao MySQL por variáveis de ambiente. Substitua os valores pelos dados do seu ambiente:
 
----
+```bash
+# Linux ou macOS
+export DB_HOST=localhost
+export DB_PORT=3306
+export DB_USER=seu_usuario
+export DB_PASSWORD='sua_senha'
+export DB_NAME=saep_db
+export SECRET_KEY='gere-uma-chave-aleatoria-para-sua-sessao'
+```
 
-## 📊 Informações do Repositório
+No Windows PowerShell, use `$env:DB_HOST="localhost"` e atribuições equivalentes para as demais variáveis.
 
-<div align="center">
+Depois de criar o banco e as tabelas conforme o guia, inicie o servidor:
 
-![GitHub repo size](https://img.shields.io/github/repo-size/rafamerlo/Oficina-mec-nica?style=for-the-badge&color=007BFF)
+```bash
+python app.py
+```
 
-![GitHub last commit](https://img.shields.io/github/last-commit/rafamerlo/Oficina-mec-nica?style=for-the-badge&color=005BBB)
+Acesse [http://127.0.0.1:5000](http://127.0.0.1:5000). O aplicativo redireciona para a tela de login.
 
-![GitHub stars](https://img.shields.io/github/stars/rafamerlo/Oficina-mec-nica?style=for-the-badge&color=00BFFF)
+## Configuração do banco
 
-</div>
+O módulo `banco.py` lê `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD` e `DB_NAME`. Se as variáveis não forem definidas, ele utiliza valores padrão locais; prefira configurar suas próprias variáveis e não use credenciais de desenvolvimento em ambientes compartilhados.
 
----
+Para preparar as tabelas e, se necessário, os dados de exemplo, consulte e execute no MySQL o SQL documentado na **Fase 2** do guia. O esquema inclui as tabelas `usuarios`, `clientes`, `veiculos` e `agendamentos`.
 
-## 👩‍💻 Desenvolvedora
+## Observação sobre dados pessoais
 
-<div align="center">
+O código gera um hash Bcrypt do CPF, mas também grava o CPF formatado na coluna `clientes.cpf` e o exibe na interface. Portanto, o hash não equivale à criptografia do dado armazenado. Antes de utilizar dados reais ou disponibilizar o sistema publicamente, revise o tratamento de dados pessoais, as credenciais padrão e a chave de sessão.
 
-### 💙 Rafaela Merlotto
+## Licença
 
-Estudante de Desenvolvimento de Sistemas.
-
-[![GitHub](https://img.shields.io/badge/GitHub-rafamerlo-0066CC?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rafamerlo)
-
----
-
-### ⭐ Gostou do projeto?
-
-Deixe uma estrela no repositório!
-
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:00BFFF,50:0066CC,100:001B44&height=120&section=footer" width="100%"/>
-
-**🔧 Desenvolvido com dedicação e tecnologia 💙**
-
-</div>
-
-
+Nenhuma licença de código foi identificada no repositório. Consulte o responsável pelo projeto antes de reutilizar ou distribuir o código.
